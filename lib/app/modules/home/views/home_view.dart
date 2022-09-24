@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:testbintoro/app/config/constant.dart';
+import 'package:testbintoro/app/modules/home/components/card_note.dart';
 import 'package:testbintoro/components/default_text.dart';
 import 'package:testbintoro/utils/function_utils.dart';
 
@@ -16,6 +17,13 @@ class HomeView extends GetView<HomeController> {
           'Test App',
           color: kBgWhite,
         ).large,
+        actions: [
+          GestureDetector(
+            onTap: controller.showInformation,
+            child: Icon(Icons.info_outline_rounded),
+          ),
+          SizedBox(width: 20),
+        ],
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
@@ -59,24 +67,8 @@ class HomeView extends GetView<HomeController> {
                     ctrl.deleteNotes(index);
                   },
                   borderRadius: kDefaultBorderRadius,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor.withOpacity(0.6),
-                      borderRadius: kDefaultBorderRadius,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        DefText(ctrl.listNotes[index]['title']).normal,
-                        SizedBox(height: 10),
-                        DefText(
-                          dateFormater(ctrl.listNotes[index]['time']),
-                        ).normal,
-                        SizedBox(height: 10),
-                        DefText(ctrl.listNotes[index]['description']).normal,
-                      ],
-                    ),
+                  child: CardNote(
+                    index: index,
                   ),
                 ),
               );

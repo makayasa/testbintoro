@@ -58,6 +58,19 @@ class HomeController extends GetxController {
     );
   }
 
+  void showInformation() {
+    Get.dialog(
+      DefaultDialog(
+        title: 'Informasi',
+        errorMessage: 'Tekan agak lama untuk menghapus',
+        onConfirm: () {
+          Get.back();
+        },
+        isOneButton: true,
+      ),
+    );
+  }
+
   void initialFunction() async {
     if (isNotEmpty(Get.arguments)) {
       arg.assignAll(Get.arguments);
