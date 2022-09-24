@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const channelId = '1234';
+const baseNotifId = 100;
+const reminderBaseNotifId = 2000;
 
 const kPrimaryColor = Color(0xFF52B3D9);
 const kBgBlack = Color(0xFF191508);
@@ -11,6 +13,7 @@ const kDefSidePadding = EdgeInsets.symmetric(horizontal: 20);
 
 //* key storage
 const kNotes = 'notes';
+const kNotifId = 'notificationId';
 
 const kDefaultBorderRadius = BorderRadius.all(
   Radius.circular(7),

@@ -6,11 +6,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testbintoro/utils/global_binding.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'app/routes/app_pages.dart';
 
 void main() async {
   await GetStorage.init();
+  timeago.setLocaleMessages('id', timeago.IdMessages());
+
   runApp(
     GetMaterialApp(
       title: "Application",

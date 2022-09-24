@@ -40,14 +40,17 @@ class NotificationController extends GetxController {
     );
   }
 
-  void scheduleTimer({
+  void scheduledNotification({
+    required int id,
     required DateTime scheduled,
     required String title,
     String? body,
+    bool setReminder = true,
+    // int? reminderMinute,
   }) async {
     var flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
     await flutterLocalNotificationPlugin.zonedSchedule(
-      170,
+      id,
       title,
       body,
       tz.TZDateTime.from(scheduled, tz.local),
@@ -58,12 +61,42 @@ class NotificationController extends GetxController {
           channelDescription: 'Default Android Channel for notifications',
           importance: Importance.max,
           priority: Priority.high,
+          playSound: false,
         ),
       ),
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
       payload: Routes.NOTIFICATION_DETAIL,
     );
+    if (setReminder) {
+      // scheduled.compareTo(DateTime.now());
+      if (DateTime.now().isBefore(tz.TZDateTime.from(scheduled, tz.local).subtract(Duration(minutes: 5)))) {
+        await flutterLocalNotificationPlugin.zonedSchedule(
+          id + reminderBaseNotifId,
+          'Hey 5 menit lagi kamu harus $title, yuk siap-siap',
+          body,
+          tz.TZDateTime.from(scheduled, tz.local).subtract(Duration(minutes: 5)),
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channelId,
+              'Android Channel',
+              channelDescription: 'Default Android Channel for notifications',
+              importance: Importance.max,
+              priority: Priority.high,
+              playSound: false,
+            ),
+          ),
+          uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+          androidAllowWhileIdle: true,
+          payload: Routes.NOTIFICATION_DETAIL,
+        );
+        logKey('reminder set');
+      }
+    }
+  }
+
+  Future<void> cancelScheduledNotif(int id) async {
+    await flutterLocalNotificationPlugin.cancel(id);
   }
 
   Future<void> initFunction() async {

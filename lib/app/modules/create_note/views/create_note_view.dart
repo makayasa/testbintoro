@@ -33,10 +33,13 @@ class CreateNoteView extends GetView<CreateNoteController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20),
-              DefText(
-                'Judul',
-                fontWeight: FontWeight.bold,
-              ).normal,
+              Container(
+                padding: EdgeInsets.only(left: 5),
+                child: DefText(
+                  'Judul',
+                  fontWeight: FontWeight.bold,
+                ).normal,
+              ),
               SizedBox(height: 10),
               InputBuilderText(
                 name: 'title',
@@ -49,10 +52,13 @@ class CreateNoteView extends GetView<CreateNoteController> {
                 ),
               ),
               SizedBox(height: 20),
-              DefText(
-                'Waktu',
-                fontWeight: FontWeight.bold,
-              ).normal,
+              Container(
+                padding: EdgeInsets.only(left: 5),
+                child: DefText(
+                  'Waktu',
+                  fontWeight: FontWeight.bold,
+                ).normal,
+              ),
               SizedBox(height: 10),
               FormBuilderDateTimePicker(
                 name: 'time',
@@ -83,11 +89,38 @@ class CreateNoteView extends GetView<CreateNoteController> {
                   ),
                 ),
               ),
+              SizedBox(height: 5),
+              Row(
+                children: [
+                  Obx(
+                    () => Checkbox(
+                      value: controller.isReminded.value,
+                      onChanged: (value) {
+                        controller.isReminded.value = !controller.isReminded.value;
+                      },
+                    ),
+                  ),
+                  DefText(
+                    'Ingatkan saya 5 menit sebelum',
+                  ).normal,
+                ],
+              ),
+              // DefText(
+              //   'Waktu',
+              //   fontWeight: FontWeight.bold,
+              // ).normal,
+              // SizedBox(height: 10),
+              // InputBuilderText(
+              //   name: 'name',
+              // ),
               SizedBox(height: 20),
-              DefText(
-                'Deskripsi',
-                fontWeight: FontWeight.bold,
-              ).normal,
+              Container(
+                padding: EdgeInsets.only(left: 5),
+                child: DefText(
+                  'Deskripsi',
+                  fontWeight: FontWeight.bold,
+                ).normal,
+              ),
               SizedBox(height: 10),
               InputBuilderText(
                 name: 'description',

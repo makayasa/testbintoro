@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 
@@ -23,4 +24,17 @@ void logKey([key, content]) {
   } else {
     log(finalLog);
   }
+}
+
+String dateFormater(
+  dynamic date, {
+  String dateFormat = "EEEE, dd MMMM - HH:mm",
+}) {
+  if (date is String) {
+    return DateFormat(dateFormat, 'id').format(DateTime.parse(date));
+  }
+  if (date is DateTime) {
+    return DateFormat(dateFormat, 'id').format(date);
+  }
+  return '';
 }
