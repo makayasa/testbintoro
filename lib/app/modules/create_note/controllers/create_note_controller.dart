@@ -12,14 +12,16 @@ class CreateNoteController extends GetxController {
 
   var title = 'Buat Pengingat'.obs;
 
-  void saveNote() {
+  void saveNote() async {
     if (formKey.currentState!.saveAndValidate()) {
       var reformat = {
         'title': formKey.currentState!.fields['title']!.value,
         'time': '${formKey.currentState!.fields['time']!.value}',
         'description': formKey.currentState!.fields['description']!.value
       };
-      box.write(kNote, reformat);
+      List tempNotes = await box.read(kNotes) ?? [];
+      tempNotes.add(reformat);
+      box.write(kNotes, tempNotes);
       Get.back();
     }
   }

@@ -10,7 +10,7 @@ const kInactiveColor = Color(0xFFa6a6a6);
 const kDefSidePadding = EdgeInsets.symmetric(horizontal: 20);
 
 //* key storage
-const kNote = 'notes';
+const kNotes = 'notes';
 
 const kDefaultBorderRadius = BorderRadius.all(
   Radius.circular(7),
