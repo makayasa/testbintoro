@@ -14,7 +14,7 @@ class NotificationController extends GetxController {
   var flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
   var box = GetStorage();
 
-  var initializationSettingsAndroid = AndroidInitializationSettings('logo_aja');
+  var initializationSettingsAndroid = AndroidInitializationSettings('logo_test');
 
   Future<void> showNotification(
     int notificationId,

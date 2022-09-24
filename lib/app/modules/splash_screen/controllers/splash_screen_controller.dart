@@ -6,10 +6,13 @@ class SplashScreenController extends GetxController {
   var flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
 
   var text = 'Test app'.obs;
+  var showImage = true.obs;
 
   void initialFunction() async {
     var notifDetail = await flutterLocalNotificationPlugin.getNotificationAppLaunchDetails();
     await Future.delayed(Duration(seconds: 2));
+    showImage.value = false;
+    await Future.delayed(Duration(seconds: 3));
     Get.offNamed(
       Routes.HOME,
       arguments: {
@@ -21,12 +24,12 @@ class SplashScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initialFunction();
   }
 
   @override
   void onReady() {
     super.onReady();
+    initialFunction();
   }
 
   @override
