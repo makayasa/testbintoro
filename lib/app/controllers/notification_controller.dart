@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../utils/function_utils.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -9,6 +12,7 @@ import '../routes/app_pages.dart';
 
 class NotificationController extends GetxController {
   var flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
+  var box = GetStorage();
 
   var initializationSettingsAndroid = AndroidInitializationSettings('logo_aja');
 
@@ -48,6 +52,8 @@ class NotificationController extends GetxController {
     bool setReminder = true,
     // int? reminderMinute,
   }) async {
+    List tempNotes = await box.read(kNotes);
+    var stringPayload = json.encode(tempNotes.last);
     var flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
     await flutterLocalNotificationPlugin.zonedSchedule(
       id,
@@ -66,7 +72,7 @@ class NotificationController extends GetxController {
       ),
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
-      payload: Routes.NOTIFICATION_DETAIL,
+      payload: stringPayload,
     );
     if (setReminder) {
       // scheduled.compareTo(DateTime.now());
@@ -88,7 +94,7 @@ class NotificationController extends GetxController {
           ),
           uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
           androidAllowWhileIdle: true,
-          payload: Routes.NOTIFICATION_DETAIL,
+          payload: stringPayload,
         );
         logKey('reminder set');
       }
@@ -113,7 +119,13 @@ class NotificationController extends GetxController {
       onSelectNotification: (payload) {
         logKey('payload notifikasi', payload);
         if (payload != null) {
-          Get.toNamed(payload);
+          var notification_data = json.decode(payload);
+          Get.toNamed(
+            Routes.DETAIL_NOTE,
+            arguments: {
+              'notification_data': notification_data,
+            },
+          );
         }
       },
     );

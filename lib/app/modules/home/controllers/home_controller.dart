@@ -23,6 +23,15 @@ class HomeController extends GetxController {
     await getNotes();
   }
 
+  void toDetailNote(int index) {
+    Get.toNamed(
+      Routes.DETAIL_NOTE,
+      arguments: {
+        'notification_data': listNotes[index],
+      },
+    );
+  }
+
   void deleteNotes(int index) async {
     // Get.defaultDialog();
     Get.dialog(

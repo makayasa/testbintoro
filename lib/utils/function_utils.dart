@@ -38,3 +38,30 @@ String dateFormater(
   }
   return '';
 }
+
+bool isEmpty(dynamic val) {
+  return [
+    "",
+    " ",
+    null,
+    'null',
+    '{}',
+    '[]',
+    '0',
+    '0.0',
+  ].contains(val.toString());
+}
+
+bool isNotEmpty(dynamic val) {
+  return ![
+    "",
+    " ",
+    null,
+    'null',
+    '{}',
+    '[]',
+    '0',
+    '0.0',
+    '0.00',
+  ].contains(val.toString());
+}

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:testbintoro/app/modules/create_note/bindings/create_note_binding.dart';
 import 'package:testbintoro/app/modules/create_note/views/create_note_view.dart';
+import 'package:testbintoro/app/modules/detail_note/bindings/detail_note_binding.dart';
+import 'package:testbintoro/app/modules/detail_note/views/detail_note_view.dart';
 import 'package:testbintoro/app/modules/home/bindings/home_binding.dart';
 import 'package:testbintoro/app/modules/home/views/home_view.dart';
 import 'package:testbintoro/app/modules/notification_detail/bindings/notification_detail_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.CREATE_NOTE,
       page: () => CreateNoteView(),
       binding: CreateNoteBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_NOTE,
+      page: () => DetailNoteView(),
+      binding: DetailNoteBinding(),
     ),
   ];
 }

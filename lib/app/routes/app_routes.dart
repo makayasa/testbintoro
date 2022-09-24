@@ -7,10 +7,12 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const NOTIFICATION_DETAIL = _Paths.NOTIFICATION_DETAIL;
   static const CREATE_NOTE = _Paths.CREATE_NOTE;
+  static const DETAIL_NOTE = _Paths.DETAIL_NOTE;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
   static const NOTIFICATION_DETAIL = '/notification-detail';
   static const CREATE_NOTE = '/create-note';
+  static const DETAIL_NOTE = '/detail-note';
 }

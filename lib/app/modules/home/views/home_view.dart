@@ -56,7 +56,9 @@ class HomeView extends GetView<HomeController> {
                       elevation: 2.4,
                       borderRadius: kDefaultBorderRadius,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          ctrl.toDetailNote(index);
+                        },
                         onLongPress: () {
                           ctrl.deleteNotes(index);
                         },
