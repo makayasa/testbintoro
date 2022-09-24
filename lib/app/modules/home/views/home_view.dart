@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:testbintoro/app/config/constant.dart';
-import 'package:testbintoro/app/routes/app_pages.dart';
 import 'package:testbintoro/components/default_text.dart';
 import 'package:testbintoro/utils/function_utils.dart';
 
@@ -13,7 +12,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
+        title: DefText(
+          'Test App',
+          color: kBgWhite,
+        ).large,
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
@@ -36,60 +38,51 @@ class HomeView extends GetView<HomeController> {
           // );
         },
       ),
-      body: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 20),
-            GetX<HomeController>(
-              init: HomeController(),
-              builder: (ctrl) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  padding: kDefSidePadding,
-                  itemCount: ctrl.listNotes.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(height: 10);
+      body: GetX<HomeController>(
+        init: HomeController(),
+        builder: (ctrl) {
+          return ListView.separated(
+            padding: kDefSidePadding.copyWith(top: 20, bottom: 100),
+            itemCount: ctrl.listNotes.length,
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 10);
+            },
+            itemBuilder: (context, index) {
+              return Material(
+                elevation: 2.4,
+                borderRadius: kDefaultBorderRadius,
+                child: InkWell(
+                  onTap: () {
+                    ctrl.toDetailNote(index);
                   },
-                  itemBuilder: (context, index) {
-                    return Material(
-                      elevation: 2.4,
+                  onLongPress: () {
+                    ctrl.deleteNotes(index);
+                  },
+                  borderRadius: kDefaultBorderRadius,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor.withOpacity(0.6),
                       borderRadius: kDefaultBorderRadius,
-                      child: InkWell(
-                        onTap: () {
-                          ctrl.toDetailNote(index);
-                        },
-                        onLongPress: () {
-                          ctrl.deleteNotes(index);
-                        },
-                        borderRadius: kDefaultBorderRadius,
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: kPrimaryColor.withOpacity(0.6),
-                            borderRadius: kDefaultBorderRadius,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              DefText(ctrl.listNotes[index]['title']).normal,
-                              SizedBox(height: 10),
-                              DefText(
-                                dateFormater(ctrl.listNotes[index]['time']),
-                              ).normal,
-                              SizedBox(height: 10),
-                              DefText(ctrl.listNotes[index]['description']).normal,
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ],
-        ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DefText(ctrl.listNotes[index]['title']).normal,
+                        SizedBox(height: 10),
+                        DefText(
+                          dateFormater(ctrl.listNotes[index]['time']),
+                        ).normal,
+                        SizedBox(height: 10),
+                        DefText(ctrl.listNotes[index]['description']).normal,
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

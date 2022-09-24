@@ -13,7 +13,6 @@ import 'app/routes/app_pages.dart';
 void main() async {
   await GetStorage.init();
   timeago.setLocaleMessages('id', timeago.IdMessages());
-
   runApp(
     GetMaterialApp(
       title: "Application",

@@ -67,7 +67,7 @@ class NotificationController extends GetxController {
           channelDescription: 'Default Android Channel for notifications',
           importance: Importance.max,
           priority: Priority.high,
-          playSound: false,
+          playSound: true,
         ),
       ),
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
@@ -89,7 +89,7 @@ class NotificationController extends GetxController {
               channelDescription: 'Default Android Channel for notifications',
               importance: Importance.max,
               priority: Priority.high,
-              playSound: false,
+              playSound: true,
             ),
           ),
           uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
@@ -108,7 +108,6 @@ class NotificationController extends GetxController {
   Future<void> initFunction() async {
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
-
     // var res = await flutterLocalNotificationPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()!.requestPermission();
 
     var initializationSettings = InitializationSettings(

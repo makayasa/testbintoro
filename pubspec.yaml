@@ -21,6 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   timeago: ^3.3.0
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_lints: ^2.0.0

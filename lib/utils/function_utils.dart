@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 
+import '../app/config/constant.dart';
 import '../app/routes/app_pages.dart';
 
 void logKey([key, content]) {
@@ -64,4 +67,16 @@ bool isNotEmpty(dynamic val) {
     '0.0',
     '0.00',
   ].contains(val.toString());
+}
+
+void showToast(message, {bgColor, txtColor}) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: bgColor ?? kPrimaryColor,
+    textColor: txtColor ?? Colors.white,
+    fontSize: 12.0,
+  );
 }

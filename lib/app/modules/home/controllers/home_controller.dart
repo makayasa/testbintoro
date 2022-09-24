@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:testbintoro/app/config/constant.dart';
@@ -10,6 +12,7 @@ import '../../../../utils/function_utils.dart';
 class HomeController extends GetxController {
   var notifC = Get.find<NotificationController>();
   var box = GetStorage();
+  var arg = {}.obs;
 
   var listNotes = [].obs;
 
@@ -56,18 +59,29 @@ class HomeController extends GetxController {
   }
 
   void initialFunction() async {
+    if (isNotEmpty(Get.arguments)) {
+      arg.assignAll(Get.arguments);
+      if (isNotEmpty(arg['payload'])) {
+        Get.toNamed(
+          Routes.DETAIL_NOTE,
+          arguments: {
+            'notification_data': json.decode(arg['payload']),
+          },
+        );
+      }
+    }
     await getNotes();
   }
 
   @override
   void onInit() {
     super.onInit();
-    initialFunction();
   }
 
   @override
   void onReady() {
     super.onReady();
+    initialFunction();
   }
 
   @override
